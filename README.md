@@ -1,9 +1,11 @@
-# 🎤 Vocalsync
+<div id="top"></div>
 
-<div align="center">
-
-**Clone any voice from seconds of audio and transplant it onto any video**
-
+<!-- PROJECT LOGO and HEADER -->
+<div style="overflow: hidden;">
+  <h1 align="center"> 🎤 Vocalsync </h1>
+  <p align="center">
+  ⚡ Clone any voice from seconds of audio and transplant it onto any video ⚡
+  </p>
 </div>
 
 ---
@@ -26,7 +28,7 @@
 
 ## 🎯 Overview
 
-Automated pipeline for video dubbing with TTS voice cloning and lipsync. Provide a source video and a voice sample—the system transcribes the video, generates new audio with the cloned voice, and syncs the lips to match.
+Automated pipeline for video dubbing with TTS voice cloning and lipsync. Provide a source video and a voice sample - the system transcribes the video, generates new audio with the cloned voice, and syncs the lips to match.
 
 ### Architecture
 
@@ -66,7 +68,7 @@ Automated pipeline for video dubbing with TTS voice cloning and lipsync. Provide
    git clone https://github.com/jojiku/Vocalsync.git
    cd Vocalsync
    ```
-
+For Docker usage:
 2. **Build and start all services**
    ```bash
    sudo docker compose up --build
@@ -77,6 +79,10 @@ Automated pipeline for video dubbing with TTS voice cloning and lipsync. Provide
    > - ChatterboxMultilingualTTS (~2GB)
 
 ---
+For notebooks usage:
+In case of limited hardware, you may want to use Kaggle's free GPU. Simpy run notebooks in kaggle with T4 enabled in this order: 
+Chatterbox.ipynb -> first half of orchestrator.ipynb -> Latentsync.ipynb -> second half of orchestrator.ipynb.
+Chatterbox and latentsync have conflicting dependencies, so its impossible to run everything in one environment.
 
 ## 💻 Usage
 
@@ -102,22 +108,20 @@ curl -X POST http://localhost:8000/process \
 ```mermaid
 graph LR
     A[Upload] --> B[Transcription]
-    B --> C[Text Grouping]
+    B --> C[Texts Grouping]
     C --> D[TTS Generation]
     D --> E[Video Splitting]
     E --> F[Lipsync]
     F --> G[Concatenation]
-    G --> H[Download]
 ```
 
 1. **Upload** - Client sends video + voice sample
 2. **Transcription** - Whisper transcribes original audio
 3. **Text Grouping** - Segments grouped into optimal TTS chunks (200-310 chars)
 4. **TTS Generation** - ChatterboxMultilingualTTS generates audio with cloned voice
-5. **Video Splitting** - Source video split into segments matching audio duration
+5. **Video Splitting** - Source video split into segments matching audio duration (each segment is no more than minute because of RAM limitations)
 6. **Lipsync** - LatentSync processes each segment
 7. **Concatenation** - Final video assembled from processed segments
-8. **Download** - Client retrieves result
 
 ---
 
@@ -134,6 +138,13 @@ graph LR
 > ⚠️ Processing time varies based on video length, GPU performance, and TTS chunk count.
 
 ---
+### Limitations
+1. Only useful in case of short voice sample presented. In case of abundance of voice you're better off with RVC
+2. In order to use the project for deepfakes or any other reason, change the code in orchestrator so it wont transcribe the initial video
+3. Latentsync depends on audio duration, so excess video frames are cut off. Again, better to use RVC if you need to keep the whole video
+
+---
+### Parameters
 
 ## 🙏 Credits
 
