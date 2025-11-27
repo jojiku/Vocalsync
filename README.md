@@ -8,12 +8,21 @@
 
 ---
 
-## 📹 Demo
-
-| Input | Output |
-|:---:|:---:|
-| **[Watch Original Video](https://github.com/user-attachments/assets/70e16d68-93c8-4b96-80cd-0673d36cef3d)** | **[Watch Result](https://github.com/user-attachments/assets/03031de1-b941-49db-8262-fc96ac9abc4c)** |
-| *Original audio source* | *Cloned voice output* |
+## 🎬 Demo
+<table class="center">
+  <tr style="font-weight: bolder;text-align:center;">
+        <td width="50%"><b>Original video</b></td>
+        <td width="50%"><b>Lip-synced video</b></td>
+  </tr>
+  <tr>
+    <td>
+      <video src=https://github.com/user-attachments/assets/70e16d68-93c8-4b96-80cd-0673d36cef3d controls preload></video>
+    </td>
+    <td>
+      <video src=https://github.com/user-attachments/assets/03031de1-b941-49db-8262-fc96ac9abc4c controls preload></video>
+    </td>
+  </tr>
+</table>
 
 ## 🎯 Overview
 
