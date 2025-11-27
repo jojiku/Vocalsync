@@ -69,6 +69,7 @@ Automated pipeline for video dubbing with TTS voice cloning and lipsync. Provide
    cd Vocalsync
    ```
 For Docker usage:
+
 2. **Build and start all services**
    ```bash
    sudo docker compose up --build
@@ -80,8 +81,12 @@ For Docker usage:
 
 ---
 For notebooks usage:
+
 In case of limited hardware, you may want to use Kaggle's free GPU. Simpy run notebooks in kaggle with T4 enabled in this order: 
-Chatterbox.ipynb -> first half of orchestrator.ipynb -> Latentsync.ipynb -> second half of orchestrator.ipynb.
+1. Chatterbox.ipynb
+2. First half of orchestrator.ipynb
+3. Latentsync.ipynb
+4. Second half of orchestrator.ipynb.
 Chatterbox and latentsync have conflicting dependencies, so its impossible to run everything in one environment.
 
 ## 💻 Usage
