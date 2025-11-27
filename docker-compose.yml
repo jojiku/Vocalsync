@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  tts:
+    image: bhimrazy/chatterbox-tts:v0.1.0
+    container_name: tts_service
+    ports:
+      - "5001:8000"  # Map their port 8000 to your 5001
+    volumes:
+      - ./temp:/app/temp
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    networks:
+      - pipeline_net
+
+  lipsync:
+    image: blacksalt/bytedance-latentsync:av_sync
+    container_name: lipsync_service
+    volumes:
+      - ./temp:/home/temp
+      - ./output:/home/output
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    networks:
+      - pipeline_net
+    command: tail -f /dev/null
+
+  orchestrator:
+    build: ./orchestrator
+    container_name: orchestrator
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./temp:/app/temp
+      - ./output:/app/output
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - pipeline_net
+    depends_on:
+      - tts
+      - lipsync
+
+networks:
+  pipeline_net:
+    driver: bridge

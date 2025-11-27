@@ -1,0 +1,6 @@
+flask
+moviepy
+pydub
+docker
+requests
+faster-whisper
