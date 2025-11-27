@@ -12,9 +12,8 @@
 
 | Input | Output |
 |:---:|:---:|
-| *Original video with source audio* | *Same video with cloned voice and synced lips* |
-
----
+| **[Watch Original Video](https://github.com/user-attachments/assets/70e16d68-93c8-4b96-80cd-0673d36cef3d)** | **[Watch Result](https://github.com/user-attachments/assets/03031de1-b941-49db-8262-fc96ac9abc4c)** |
+| *Original audio source* | *Cloned voice output* |
 
 ## 🎯 Overview
 
